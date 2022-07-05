@@ -2,6 +2,7 @@ package m.com.ids.app.controller;
 
 import m.com.ids.app.exception.Mensaje;
 import m.com.ids.app.model.Country;
+import m.com.ids.app.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,36 +14,36 @@ import java.util.List;
 @RequestMapping("/servicios")
 public class CountyController {
     @Autowired
-    private CountyController countyController; //Contiene los metodos del CRUD que va a poder utilizar nuestra apliacion
+    private CountryService productService; //Contiene los metodos del CRUD que va a poder utilizar nuestra apliacion
 
     @GetMapping("/listapaises")
     public ResponseEntity<?> getAllCountry() {
-        List<Country> lista = countyController.getAllCountry();
+        List<Country> lista = productService.getAllCountry();
         if(lista.isEmpty()){
-            return new ResponseEntity<>(new Mensaje("Sin empleados en la Base de Datos"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new Mensaje("Sin paises en la Base de Datos"), HttpStatus.BAD_REQUEST);
         }
-        return ResponseEntity.ok().body(countyController.getAllCountry());
+        return ResponseEntity.ok().body(productService.getAllCountry());
     }
 
     @GetMapping("/detallepais/{id}")
     public ResponseEntity<Country> getProductById(@PathVariable long id) {
-        return ResponseEntity.ok().body(countyController.getById(id));
+        return ResponseEntity.ok().body(productService.getById(id));
     }
 
     @PostMapping("/añadirpais")
-    public ResponseEntity<Country> createCountry(@RequestBody Country country) {
-        return ResponseEntity.ok().body(this.countyController.createCountry(country));
+    public ResponseEntity<Country> createProduct(@RequestBody Country employee) {
+        return ResponseEntity.ok().body(this.productService.createCountry(employee));
     }
 
     @PutMapping("/actualizapais/{id}")
-    public ResponseEntity<Country> updateCountry(@PathVariable long id, @RequestBody Country country) {
-        country.setId(id);
-        return ResponseEntity.ok().body(this.countyController.updateCountry(country));
+    public ResponseEntity<Country> updateProduct(@PathVariable long id, @RequestBody Country employee) {
+        employee.setId(id);
+        return ResponseEntity.ok().body(this.productService.updateCountry(employee));
     }
 
     @DeleteMapping("/eliminapais/{id}")
-    public HttpStatus deleteCountry(@PathVariable long id) {
-        this.countyController.deleteCountry(id);
+    public HttpStatus deleteProduct(@PathVariable long id) {
+        this.productService.deleteCountry(id);
         return HttpStatus.OK;
     }
 }

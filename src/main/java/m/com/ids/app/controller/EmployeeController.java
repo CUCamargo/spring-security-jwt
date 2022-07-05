@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController //Notación para indicar que es un controlador de tipo Rest y que puede interceptar peticiones al servidor.
-@RequestMapping("/servicioss")//Notación para mapear los endpoint (las urls de nueestra API) es decir /products/nombredelServicio
+@RequestMapping("/servicios")//Notación para mapear los endpoint (las urls de nueestra API) es decir /products/nombredelServicio
 public class EmployeeController {
 
 	//Inyección de dependencias

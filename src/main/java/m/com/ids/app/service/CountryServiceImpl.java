@@ -11,13 +11,13 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class CountryServiceImpl {
+public class CountryServiceImpl implements CountryService{
     @Autowired
     private CountryRepository countryRepository;
 
     @Override
-    public Country createCountry(Country country) {
-        return countryRepository.save(country);
+    public Country createCountry(Country employee) {
+        return countryRepository.save(employee);
     }
 
     @Override
@@ -42,19 +42,19 @@ public class CountryServiceImpl {
     }
 
     @Override
-    public Country getById(long countrytId) {
+    public Country getById(long productId) {
 
-        Optional<Country> productDb = this.countryRepository.findById(countrytId);
+        Optional<Country> productDb = this.countryRepository.findById(productId);
 
         if (productDb.isPresent()) {
             return productDb.get();
         } else {
-            throw new ResourceNotFoundException("Record not found with id : " + countrytId);
+            throw new ResourceNotFoundException("Record not found with id : " + productId);
         }
     }
 
     @Override
-    public void deleteEmployee(long productId) {
+    public void deleteCountry(long productId) {
         Optional<Country> productDb = this.countryRepository.findById(productId);
 
         if (productDb.isPresent()) {
